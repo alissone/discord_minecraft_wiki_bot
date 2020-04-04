@@ -13,8 +13,14 @@ def remove_stopwords(text):
             clean_text.append(word)
     return ' '.join(clean_text)
 
+
 def title_case_without_stopwords(query):
-    return ' '.join([word.title() if word not in set(stopwords.words("english")) else word.lower() for word in word_tokenize(query)])
+    return ' '.join([
+        word.title()
+        if word not in set(stopwords.words("english")) else word.lower()
+        for word in word_tokenize(query)
+    ])
+
 
 def get_tag_words(text, tag):
     words = []
