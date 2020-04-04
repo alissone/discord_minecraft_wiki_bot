@@ -21,5 +21,4 @@ def check_multi_syns_inside(word_list, sentence):
     answers = []
     for word in word_list:
         answers.append(check_syns_inside(word, sentence))
-    print(answers)
     return any(answers)
