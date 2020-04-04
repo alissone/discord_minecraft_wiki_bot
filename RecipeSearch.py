@@ -2,7 +2,7 @@ from nested_lookup import nested_lookup
 import json
 import urllib.request
 from DuckDuckGoTools import duck_summary
-from FuzzySearch import get_nouns, valid_distance, compute_distances
+from FuzzySearch import get_nouns, valid_distance, compute_distances, title_case_without_stopwords
 
 def search_in_recipes(query,recipe_vocabulary,thresh=65):
     recipes_found = []
@@ -21,8 +21,11 @@ def get_crafting_image(query, only_url=False):
 
         valid_queries = search_in_recipes(query, recipes_vocabulary)
         print("valid_queries",valid_queries)
+        search_results = nested_lookup(title_case_without_stopwords(valid_queries[0]), recipes)
+        print("search_results", search_results)
 
-        for result in (nested_lookup(valid_queries[0].title(), recipes)):
+        for result in search_results:
+            print("get_crafting_image result", result)
             craft_end = result['craft']
             craft_url = 'https://www.minecraft-crafting.net/app/{}'.format(craft_end)
             result = True
