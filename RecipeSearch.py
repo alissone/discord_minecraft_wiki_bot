@@ -8,7 +8,6 @@ def search_in_recipes(query,recipe_vocabulary,thresh=65):
     recipes_found = []
     nouns = get_nouns(query)
     for word in nouns:
-        print(word)
         recipes_found.append(valid_distance(compute_distances(word,recipe_vocabulary),thresh))
     if recipes_found:
         return recipes_found
@@ -20,12 +19,9 @@ def get_crafting_image(query, only_url=False):
         recipes_vocabulary = list(recipes.keys())
 
         valid_queries = search_in_recipes(query, recipes_vocabulary)
-        print("valid_queries",valid_queries)
         search_results = nested_lookup(title_case_without_stopwords(valid_queries[0]), recipes)
-        print("search_results", search_results)
 
         for result in search_results:
-            print("get_crafting_image result", result)
             craft_end = result['craft']
             craft_url = 'https://www.minecraft-crafting.net/app/{}'.format(craft_end)
             result = True

@@ -18,7 +18,6 @@ def craft_intent(message):
 def craft_recipe_search(message):
 
     crafting_recipe = get_crafting_image(message.content)
-    print("crafting_recipe",crafting_recipe)
     if crafting_recipe:
         return crafting_recipe
 
