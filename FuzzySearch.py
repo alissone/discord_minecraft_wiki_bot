@@ -15,11 +15,12 @@ def remove_stopwords(text):
 
 
 def title_case_without_stopwords(query):
-    return ' '.join([
-        word.title()
-        if word not in set(stopwords.words("english")) else word.lower()
-        for word in word_tokenize(query)
-    ])
+    if len(query) > 0:
+        return ' '.join([
+            word.title()
+            if word not in set(stopwords.words("english")) else word.lower()
+            for word in word_tokenize(query)
+        ])
 
 
 def get_tag_words(text, tag):
@@ -49,7 +50,7 @@ def compute_distances(query, vocabulary, sort=False):
     for word in vocabulary:
         distances.append({
             'key': word,
-            'dist': fuzz.partial_ratio(query, word)
+            'dist': fuzz.ratio(query, word)
         })
     if sort:
         return sort_by_dist(distances)

@@ -4,9 +4,7 @@ from SecretToken import token
 import discord
 
 TOKEN = token()
-
 client = discord.Client()
-
 
 @client.event
 async def on_ready():
@@ -19,7 +17,6 @@ def craft_intent(message):
 
 
 def craft_recipe_search(message):
-
     crafting_recipe = get_crafting_image(message.content)
     if crafting_recipe:
         return crafting_recipe
@@ -32,6 +29,8 @@ async def on_message(message):
     if craft_intent(message):
         crafting_recipe = craft_recipe_search(message)
         if crafting_recipe:
+            if isinstance(crafting_recipe,list):
+                crafting_recipe = '\n'.join(crafting_recipe)
             await message.channel.send(crafting_recipe)
 
     if message.content.startswith('$hello'):
